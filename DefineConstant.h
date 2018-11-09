@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])
 
 
-
-
 //取屏幕宽高的最大值
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -126,6 +124,15 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #       define DLog(...)
 #endif
 
+/** block 声明 */
+#ifdef NS_BLOCKS_AVAILABLE
+typedef void (^ZLyBasicBlock)(void);
+typedef void (^ZLyOperationCallBackBlock)(BOOL isSuccess, NSString *errorMsg);
+typedef void (^ZLyArrayBlock)(NSArray *list);
+#endif
+
+/**NSString转UTF8 */
+#define OC(str) [NSString stringWithCString:(str) encoding:NSUTF8StringEncoding]
 
 /** 弹出提示框 UIAlertView */
 #define showMessageView(__MESSAGE__) \
