@@ -36,11 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 #define kScreenWidth             ([[UIScreen mainScreen] bounds].size.width)
 #define kScreenHeight            ([[UIScreen mainScreen] bounds].size.height)
 /**适配 iPhone X TabBar和导航区别
-   * Top区别:iPhone X 为例:导航(44 points)+状态栏(44 points)= 88 points
-   *        Iphone 6s为例:导航(44 points)+状态栏(20 points)= 64 points
-   * Bottom区别:iPhone X 为例: 83 points高度(TabBar) = Danger Area(34 points) + 原来的49 points
-   *           Iphone 6s为例:49 points高度(TabBar) = 49 points
-   */
+ * Top区别:iPhone X 为例:导航(44 points)+状态栏(44 points)= 88 points
+ *        Iphone 6s为例:导航(44 points)+状态栏(20 points)= 64 points
+ * Bottom区别:iPhone X 为例: 83 points高度(TabBar) = Danger Area(34 points) + 原来的49 points
+ *           Iphone 6s为例:49 points高度(TabBar) = 49 points
+ */
 //iPhoneX / iPhoneXS
 #define  isIphoneX_XS     (kScreenWidth == 375.f && kScreenHeight == 812.f ? YES : NO)
 //iPhoneXR / iPhoneXSMax
@@ -85,9 +85,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 /** 验证手机号及固话方法 */
 #define TelephoneNUM  @"^(0[0-9]{2,3})?([2-9][0-9]{6,7})+(-[0-9]{1,4})?$|(^(13[0-9]|15[0|3|6|7|8|9]|18[8|9])\\d{8}$)"
 /** 判断社会信用代码证 */
-#define TelephoneNUM  @"^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-9Y])$"
-/** 验证手机号及固话方法 */
-#define TelephoneNUM  @"^(0[0-9]{2,3})?([2-9][0-9]{6,7})+(-[0-9]{1,4})?$|(^(13[0-9]|15[0|3|6|7|8|9]|18[8|9])\\d{8}$)"
+#define SocialCreditNUM  @"^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-9Y])$"
 /** 工商税号 */
 #define BusinessCirclesNUM  @"[0-9]\\\\d{13}([0-9]|X)$"
 /** 邮政编码 */
@@ -118,10 +116,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define IOS7_OR_LATER  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
 /** 打印 NSlog */
-#ifdef DEBUGLOG
-#       define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
-#       define DLog(...)
+#   define DLog(...)
 #endif
 
 /** block 声明 */
@@ -160,6 +159,10 @@ UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertAc
 /** 数组是否为空 */
 #define IsArrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref) count] == 0))
 
+/** 去掉首尾空格和换行符 */
+#define FirstAndLastSpace(str) [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+/**去掉所有空格*/
+#define RemoveAllSpaces(str) [str stringByReplacingOccurrencesOfString:@" " withString:@""]
 
 /** 便捷方式创建NSNumber类型 */
 #undef    __INT
